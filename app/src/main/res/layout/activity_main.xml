@@ -11,18 +11,29 @@
 
 
     <TextView
+        android:id="@+id/title_events"
+        android:text="@string/title_events"
+
         android:layout_marginTop="20dp"
         android:textSize="32dp"
         android:gravity="center"
         android:textStyle="bold"
-        android:id="@+id/title_events"
         android:layout_width="150dp"
         android:layout_height="48dp"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:text="@string/title_events" />
+         />
+
+    <TextView
+        android:id="@+id/innholdTest"
+        android:text="@string/innholdTest"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        />
 
     <ListView
         android:id="@+id/listView"
+
         android:layout_width="344dp"
         android:layout_height="288dp"
         android:layout_gravity="center_vertical|center_horizontal"
@@ -32,11 +43,13 @@
 
     <Button
         android:id="@+id/btn_newEvent"
+        android:text="@string/btn_newEvent"
+
         android:layout_marginTop="20dp"
         android:layout_width="189dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:text="@string/btn_newEvent" />
+        />
 
     <GridLayout
         android:layout_marginTop="20dp"
@@ -48,16 +61,20 @@
 
         <Button
             android:id="@+id/btn_friends"
+            android:text="@string/btn_friends"
+
             android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:text="@string/btn_friends" />
+             />
 
         <Button
             android:id="@+id/btn_preferences"
+            android:text="@string/btn_preferences"
+
             android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="@string/btn_preferences" />
+            />
     </GridLayout>
 </LinearLayout>

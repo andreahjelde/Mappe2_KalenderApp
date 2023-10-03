@@ -2,11 +2,11 @@
     <string name="app_name">Mappe2_s364756</string>
 
     <!-- ____________MainActivity_________________ -->
-    <string name="title_events">Avtaler: </string>
-    <string name="text_input"></string>
+    <string name="title_events">Avtaler</string>
     <string name="btn_newEvent">Legg til ny avtale</string>
     <string name="btn_friends">Venner</string>
     <string name="btn_preferences">Instillinger</string>
+    <string name="innholdTest"></string>
 
         <!-- Dialog - legg til ny avtale -->
         <string name="title_Dialog">Opprett ny avtale:</string>
@@ -18,7 +18,9 @@
         <string name="btn_exit">Avbryt</string>
 
     <!-- ____________FriendsActivity_________________ -->
-
+    <string name="title_friends">Mine venner </string>
+    <string name="text_inputFriends"></string>
+    <string name="btn_newFriend">Legg til ny venn</string>
 
 
     <!-- ____________PreferencesActivity_________________ -->
