@@ -21,7 +21,6 @@ public class Oppgave {
         this.dateEvent = dateEvent;
         this.timeEvent = timeEvent;
         this.placeEvent = placeEvent;
-        this.id = id;
     }
 
     public String getNameEvent() {

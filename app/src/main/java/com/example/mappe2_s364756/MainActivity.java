@@ -78,17 +78,17 @@ public class MainActivity extends AppCompatActivity {
         //---------------KNAPP FOR Å LEGGE TIL EN NY AKTIVITET
         dialogButtonAddEvent.setOnClickListener((view -> {
             String name = dialogInputNameOfEvent.getText().toString();
-
-
             String date = dialogInputDate.getText().toString();
             String time = dialogInputTime.getText().toString();
             String place = dialogInputPlace.getText().toString();
 
-
             List<Oppgave> oppgaveList = new ArrayList<>();
+
             oppgaveList.add(new Oppgave(name, date, time, place));
+
             ArrayAdapter<Oppgave> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, oppgaveList);
             listView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
 
             //---------------KNAPP SOM AKTIVERES NÅR MAN TRYKKER PÅ ET OBJEKT I LISTEN
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Oppgave selectedOppgave = (Oppgave) parent.getItemAtPosition(position);
                     // Handle item click here
-                    Toast.makeText(MainActivity.this, "Clicked on: " + selectedOppgave.getId(),
+                    Toast.makeText(MainActivity.this, "Clicked on: " + selectedOppgave.getNameEvent(),
                             Toast.LENGTH_LONG).show();
                 }
             });
@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
             dialog.dismiss();
         }));
         dialog.show();
+
 
 //---------------KNAPP FOR Å LUKKE DIALOGBOKS
         dialogButtonExit.setOnClickListener((view -> {
