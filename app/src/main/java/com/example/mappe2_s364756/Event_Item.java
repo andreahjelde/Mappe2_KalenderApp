@@ -2,7 +2,7 @@ package com.example.mappe2_s364756;
 
 import androidx.annotation.NonNull;
 
-public class Oppgave {
+public class Event_Item {
     private String nameEvent;
     private String dateEvent;
     private String timeEvent;
@@ -12,15 +12,10 @@ public class Oppgave {
     @NonNull
     @Override
     public String toString() {
-        return "Avtale: " + nameEvent + "\n" + "Dato: " + dateEvent ;
+        return "Avtale: " + nameEvent ;
     }
+    public Event_Item(){
 
-    public Oppgave(String nameEvent, String dateEvent, String timeEvent, String placeEvent)
-    {
-        this.nameEvent = nameEvent;
-        this.dateEvent = dateEvent;
-        this.timeEvent = timeEvent;
-        this.placeEvent = placeEvent;
     }
 
     public String getNameEvent() {
@@ -39,7 +34,9 @@ public class Oppgave {
         return placeEvent;
     }
 
-    public long getId(){ return id;}
+    public long getId() {
+        return id;
+    }
 
     public void setNameEvent(String nameEvent) {
         this.nameEvent = nameEvent;

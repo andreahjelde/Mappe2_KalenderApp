@@ -6,22 +6,13 @@
     <string name="btn_newEvent">Legg til ny avtale</string>
     <string name="btn_friends">Venner</string>
     <string name="btn_preferences">Instillinger</string>
-    <string name="innholdTest"></string>
 
-        <!-- Dialog - legg til ny avtale -->
-        <string name="title_Dialog">Opprett ny avtale:</string>
-        <string name="placeholder_nameOfEvent">Navn på avtale: </string>
-        <string name="placeholder_date">Dato:</string>
-        <string name="placeholder_time">Klokkeslett: </string>
-        <string name="placeholder_place">Sted: </string>
-        <string name="btn_addEvent">Opprett avtale</string>
-        <string name="btn_exit">Avbryt</string>
+    <!-- ____________NewEvent_________________ -->
+    <string name="title_newEvents">Legg til ny avtale</string>
+    <string name="placeholder_eventName">Navn på avtale:</string>
+    <string name="placeholder_eventDate">Dato:</string>
+    <string name="placeholder_eventTime">Klokkeslett:</string>
+    <string name="placeholder_eventPlace">Sted:</string>
+    <string name="btn_saveNewEvent">Lagre ny avtale</string>
 
-    <!-- ____________FriendsActivity_________________ -->
-    <string name="title_friends">Mine venner </string>
-    <string name="text_inputFriends"></string>
-    <string name="btn_newFriend">Legg til ny venn</string>
-
-
-    <!-- ____________PreferencesActivity_________________ -->
 </resources>

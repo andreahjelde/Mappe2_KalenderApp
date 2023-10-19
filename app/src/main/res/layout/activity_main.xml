@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -15,70 +14,65 @@
         android:padding="16dp"
         tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/title_events"
-        android:text="@string/title_events"
+        <TextView
+            android:id="@+id/title_events"
+            android:text="@string/title_events"
 
-        android:layout_marginTop="20dp"
-        android:textSize="32dp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:layout_width="150dp"
-        android:layout_height="48dp"
-        android:layout_gravity="center_vertical|center_horizontal"
-         />
-
-    <TextView
-        android:id="@+id/innholdAvtaleTxtField"
-        android:layout_width="150dp"
-        android:layout_height="73dp"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:text="@string/innholdTest" />
-
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="344dp"
-        android:layout_height="288dp"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_marginTop="20dp"
-        tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="156dp" />
-
-    <Button
-        android:id="@+id/btn_newEvent"
-        android:text="@string/btn_newEvent"
-
-        android:layout_marginTop="20dp"
-        android:layout_width="189dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal"
-        />
-
-    <GridLayout
-        android:layout_marginTop="20dp"
-        android:layout_width="290dp"
-        android:layout_height="50dp"
-        tools:layout_editor_absoluteX="60dp"
-        tools:layout_editor_absoluteY="46dp"
-        android:layout_gravity="center_vertical|center_horizontal">
-
-        <Button
-            android:id="@+id/btn_friends"
-            android:text="@string/btn_friends"
-
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-             />
-
-        <Button
-            android:id="@+id/btn_preferences"
-            android:text="@string/btn_preferences"
-
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_marginTop="20dp"
+            android:textSize="32dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_width="150dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical|center_horizontal"
             />
-    </GridLayout>
-</LinearLayout>
+
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="344dp"
+            android:layout_height="288dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="20dp"
+            tools:layout_editor_absoluteX="78dp"
+            tools:layout_editor_absoluteY="156dp" />
+
+        <Button
+            android:id="@+id/btn_newEvent"
+            android:text="@string/btn_newEvent"
+
+            android:layout_marginTop="20dp"
+            android:layout_width="189dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            />
+
+        <GridLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="290dp"
+            android:layout_height="50dp"
+            tools:layout_editor_absoluteX="60dp"
+            tools:layout_editor_absoluteY="46dp"
+            android:layout_gravity="center_vertical|center_horizontal">
+
+            <Button
+                android:id="@+id/btn_friends"
+                android:text="@string/btn_friends"
+
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                />
+
+            <Button
+                android:id="@+id/btn_preferences"
+                android:text="@string/btn_preferences"
+
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                />
+
+        </GridLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

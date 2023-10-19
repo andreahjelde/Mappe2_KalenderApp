@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".NewEventActivity">
+
+    <TextView
+        android:id="@+id/title_NewEvents"
+        android:text="@string/title_events"
+        android:layout_marginTop="20dp"
+        android:textSize="32dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/placeholder_eventName"
+        android:text="@string/placeholder_eventName"/>
+
+    <EditText
+        android:id="@+id/input_event_name"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/placeholder_eventDate"
+        android:text="@string/placeholder_eventDate"/>
+
+    <EditText
+        android:id="@+id/input_event_date"
+        android:layout_width="312dp"
+        android:layout_height="wrap_content"
+        android:inputType="date" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/placeholder_eventTime"
+        android:text="@string/placeholder_eventTime"/>
+
+    <EditText
+        android:id="@+id/input_event_time"
+        android:layout_width="311dp"
+        android:layout_height="wrap_content"
+        android:inputType="datetime" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/placeholder_eventPlace"
+        android:text="@string/placeholder_eventPlace"/>
+
+    <EditText
+        android:id="@+id/input_event_place"
+        android:layout_width="312dp"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_saveNewEvent"
+        android:text="@string/btn_saveNewEvent"
+
+        android:layout_marginTop="20dp"
+        android:layout_width="189dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="344dp"
+        android:layout_height="288dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="20dp"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="156dp" />
+</LinearLayout>
