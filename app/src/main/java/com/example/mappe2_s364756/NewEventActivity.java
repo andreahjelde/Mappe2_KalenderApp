@@ -39,22 +39,20 @@ public class NewEventActivity extends AppCompatActivity {
 
         Button btn_saveNewEvent = findViewById(R.id.btn_saveNewEvent);
 
-        btn_saveNewEvent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String eventName = input_event_name.getText().toString();
-                String eventDate = input_event_date.getText().toString();
-                String eventTime = input_event_time.getText().toString();
-                String eventPlace = input_event_place.getText().toString();
-                if(!eventName.isEmpty() ){
-                    Event_Item eventItem = dataKilde.addNewEvent(eventName);
-                    eventItemArrayAdapter.add(eventItem);
-                }
+        btn_saveNewEvent.setOnClickListener(view -> {
+            String eventName = input_event_name.getText().toString();
+            String eventDate = input_event_date.getText().toString();
+            String eventTime = input_event_time.getText().toString();
+            String eventPlace = input_event_place.getText().toString();
+            if(!eventName.isEmpty() ){
+                Event_Item eventItem = dataKilde.addNewEvent(eventName);
+                eventItemArrayAdapter.add(eventItem);
 
-                Intent i= new Intent(NewEventActivity.this, MainActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
             }
+
+            Intent i= new Intent(NewEventActivity.this, MainActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
         });
     };
     @Override

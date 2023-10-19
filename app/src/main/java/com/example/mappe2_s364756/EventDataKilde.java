@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,9 @@ public class EventDataKilde {
 
     private Event_Item cursorToEvent(Cursor cursor) {
         Event_Item eventItem = new Event_Item();
-        eventItem.setId(cursor.getLong(cursor.getColumnIndexOrThrow(DatabaseHjelper.KOLONNE_ID)));
+        int index = cursor.getColumnIndexOrThrow(DatabaseHjelper.KOLONNE_ID);
+        long lang = cursor.getLong(index);
+        eventItem.setId(lang);
         eventItem.setNameEvent(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHjelper.KOLONNE_EVENT_NAME)));
         return eventItem;
     }

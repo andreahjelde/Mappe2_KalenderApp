@@ -15,4 +15,13 @@
     <string name="placeholder_eventPlace">Sted:</string>
     <string name="btn_saveNewEvent">Lagre ny avtale</string>
 
+
+    <!-- ____________FriendsActivity_________________ -->
+    <string name="title_friends">Venner</string>
+    <string name="btn_newFriend">Legg til ny venn</string>
+
+    <!-- ____________NewFriends_________________ -->
+    <string name="title_newFriends">Legg til ny venn</string>
+    <string name="placeholder_friendName">Navn:</string>
+    <string name="placeholder_friendPhone">Tlf-nummer:</string>
 </resources>
