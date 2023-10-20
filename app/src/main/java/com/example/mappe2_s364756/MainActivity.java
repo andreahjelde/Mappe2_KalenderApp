@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
         Button btn_newEvent = findViewById(R.id.btn_newEvent);
 
 
-
-
         dataKilde = new EventDataKilde(this);
         dataKilde.open();
 
@@ -41,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         eventItemArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, eventItems);
         eventItemListView.setAdapter(eventItemArrayAdapter);
+
 
         eventItemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

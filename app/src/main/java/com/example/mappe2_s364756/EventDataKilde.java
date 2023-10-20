@@ -26,9 +26,12 @@ public class EventDataKilde {
         dbHelper.close();
     }
 
-    public Event_Item addNewEvent(String eventName) {
+    public Event_Item addNewEvent(String eventName, String eventTime, String eventPlace, String eventDate) {
         ContentValues values = new ContentValues();
         values.put(DatabaseHjelper.KOLONNE_EVENT_NAME, eventName);
+        values.put(DatabaseHjelper.KOLONNE_EVENT_TIME, eventTime);
+        values.put(DatabaseHjelper.KOLONNE_EVENT_PLACE, eventPlace);
+        values.put(DatabaseHjelper.KOLONNE_EVENT_DATE, eventDate);
         long insertId = database.insert(DatabaseHjelper.TABELL_EVENTS, null,
                 values);
         Cursor cursor = database.query(DatabaseHjelper.TABELL_EVENTS, null,
@@ -45,6 +48,9 @@ public class EventDataKilde {
         long lang = cursor.getLong(index);
         eventItem.setId(lang);
         eventItem.setNameEvent(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHjelper.KOLONNE_EVENT_NAME)));
+        eventItem.setDateEvent(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHjelper.KOLONNE_EVENT_DATE)));
+        eventItem.setTimeEvent(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHjelper.KOLONNE_EVENT_TIME)));
+        eventItem.setPlaceEvent(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHjelper.KOLONNE_EVENT_PLACE)));
         return eventItem;
     }
 

@@ -1,6 +1,7 @@
 package com.example.mappe2_s364756;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 
 public class Event_Item {
     private String nameEvent;
@@ -12,10 +13,10 @@ public class Event_Item {
     @NonNull
     @Override
     public String toString() {
-        return "Avtale: " + nameEvent ;
+        return "Avtale: " + nameEvent + "           Sted: " + placeEvent;
     }
-    public Event_Item(){
 
+    public Event_Item(){
     }
 
     public String getNameEvent() {

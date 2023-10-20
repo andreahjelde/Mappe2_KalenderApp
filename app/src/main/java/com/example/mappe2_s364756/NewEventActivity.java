@@ -45,7 +45,7 @@ public class NewEventActivity extends AppCompatActivity {
             String eventTime = input_event_time.getText().toString();
             String eventPlace = input_event_place.getText().toString();
             if(!eventName.isEmpty() ){
-                Event_Item eventItem = dataKilde.addNewEvent(eventName);
+                Event_Item eventItem = dataKilde.addNewEvent(eventName, eventDate, eventTime, eventPlace);
                 eventItemArrayAdapter.add(eventItem);
 
             }

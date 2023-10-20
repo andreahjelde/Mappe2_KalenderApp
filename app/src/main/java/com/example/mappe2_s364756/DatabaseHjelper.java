@@ -18,13 +18,15 @@ public class DatabaseHjelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_TASKS = "CREATE TABLE " +
             TABELL_EVENTS +
             "(" + KOLONNE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            KOLONNE_EVENT_NAME + " TEXT NOT NULL)";
+            KOLONNE_EVENT_NAME + "TEXT NOT NULL, " + KOLONNE_EVENT_DATE + "TEXT NOT NULL," +
+            KOLONNE_EVENT_TIME + " TEXT NOT NULL," + KOLONNE_EVENT_PLACE + " TEXT NOT NULL)";
     public DatabaseHjelper(Context context) {
         super(context, DATABASE_NAVN, null, DATABASE_VERSION);
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE_TASKS);
+        db.execSQL(CREATE_TABLE_TASKS );
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
