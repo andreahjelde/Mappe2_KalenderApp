@@ -31,7 +31,9 @@ public class DatabaseHjelper extends SQLiteOpenHelper {
             KOLONNE_EVENT_NAME + " TEXT NOT NULL, " +
             KOLONNE_EVENT_DATE + " TEXT, " +
             KOLONNE_EVENT_TIME + " TEXT, " +
-            KOLONNE_EVENT_PLACE + " TEXT)";
+            KOLONNE_EVENT_PLACE + " TEXT, " +
+            KOLONNE_FRIEND_ID + " INTEGER " +
+            " ,FOREIGN KEY(" + KOLONNE_FRIEND_ID + ") REFERENCES " + TABELL_FRIENDS + "(" + KOLONNE_FRIEND_ID + "))" ;
 
     private static final String CREATE_TABLE_FRIEND = "CREATE TABLE " + TABELL_FRIENDS + "(" +
             KOLONNE_FRIEND_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +

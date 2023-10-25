@@ -66,6 +66,15 @@
         android:layout_width="312dp"
         android:layout_height="wrap_content" />
 
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="344dp"
+        android:layout_height="288dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="20dp"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="156dp" />
+
     <Button
         android:id="@+id/btn_saveNewEvent"
         android:text="@string/btn_saveNewEvent"
@@ -76,12 +85,5 @@
         android:layout_gravity="center_vertical|center_horizontal"
         />
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="344dp"
-        android:layout_height="288dp"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_marginTop="20dp"
-        tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="156dp" />
+
 </LinearLayout>
