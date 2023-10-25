@@ -2,7 +2,6 @@ package com.example.mappe2_s364756;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +15,7 @@ public class NewEventActivity extends AppCompatActivity {
     private ArrayAdapter <Event_Item> eventItemArrayAdapter;
     private EditText input_event_name;
     private EditText input_event_date, input_event_time, input_event_place;
-    private List<Event_Item> eventItems;
+    List<Event_Item> eventItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,7 @@ public class NewEventActivity extends AppCompatActivity {
             String eventDate = input_event_date.getText().toString();
             String eventTime = input_event_time.getText().toString();
             String eventPlace = input_event_place.getText().toString();
-            if(!eventName.isEmpty() ){
+            if(!eventName.isEmpty()  ){
                 Event_Item eventItem = dataKilde.addNewEvent(eventName, eventDate, eventTime, eventPlace);
                 eventItemArrayAdapter.add(eventItem);
 
@@ -54,7 +53,7 @@ public class NewEventActivity extends AppCompatActivity {
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
         });
-    };
+    }
     @Override
     protected void onResume() {
         dataKilde.open();

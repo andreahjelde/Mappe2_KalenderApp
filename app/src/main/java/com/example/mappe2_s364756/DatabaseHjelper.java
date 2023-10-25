@@ -7,19 +7,37 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHjelper extends SQLiteOpenHelper {
         private static final String DATABASE_NAVN = "events.db";
         private static final int DATABASE_VERSION = 1;
+
+        //Tabeller
         public static final String TABELL_EVENTS = "events";
+        public static final String TABELL_FRIENDS = "friends";
+
+        //Kolonner for tabell "events"
         public static final String KOLONNE_ID = "id";
         public static final String KOLONNE_EVENT_NAME = "nameEvent";
         public static final String KOLONNE_EVENT_DATE = "dateEvent";
         public static final String KOLONNE_EVENT_TIME = "timeEvent";
         public static final String KOLONNE_EVENT_PLACE = "placeEvent";
 
+        //Kolonner for tabell "friends"
+        public static final String KOLONNE_FRIEND_ID = "idFriend";
+        public static final String KOLONNE_FRIEND_NAME = "nameFriend";
+        public static final String KOLONNE_FRIEND_PHONE = "phoneFriend";
+
 
     private static final String CREATE_TABLE_TASKS = "CREATE TABLE " +
-            TABELL_EVENTS +
-            "(" + KOLONNE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            KOLONNE_EVENT_NAME + "TEXT NOT NULL, " + KOLONNE_EVENT_DATE + "TEXT NOT NULL," +
-            KOLONNE_EVENT_TIME + " TEXT NOT NULL," + KOLONNE_EVENT_PLACE + " TEXT NOT NULL)";
+            TABELL_EVENTS + "(" +
+            KOLONNE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            KOLONNE_EVENT_NAME + " TEXT NOT NULL, " +
+            KOLONNE_EVENT_DATE + " TEXT, " +
+            KOLONNE_EVENT_TIME + " TEXT, " +
+            KOLONNE_EVENT_PLACE + " TEXT)";
+
+    private static final String CREATE_TABLE_FRIEND = "CREATE TABLE " + TABELL_FRIENDS + "(" +
+            KOLONNE_FRIEND_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            KOLONNE_FRIEND_NAME + " TEXT NOT NULL, " +
+            KOLONNE_FRIEND_PHONE + " TEXT)";
+
     public DatabaseHjelper(Context context) {
         super(context, DATABASE_NAVN, null, DATABASE_VERSION);
     }
@@ -27,10 +45,13 @@ public class DatabaseHjelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_TASKS );
+        db.execSQL(CREATE_TABLE_FRIEND);
     }
+
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
-    { onCreate(db);
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        onCreate(db);
     }
 }
 

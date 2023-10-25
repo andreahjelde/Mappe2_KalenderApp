@@ -24,4 +24,7 @@
     <string name="title_newFriends">Legg til ny venn</string>
     <string name="placeholder_friendName">Navn:</string>
     <string name="placeholder_friendPhone">Tlf-nummer:</string>
+
+    <!-- ____________Preferences_________________ -->
+    <string name="titlePreferences">Instillinger</string>
 </resources>

@@ -2,8 +2,6 @@ package com.example.mappe2_s364756;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -15,9 +13,9 @@ import java.util.List;
 
 public class FriendsActivity extends AppCompatActivity {
 
-    private EventDataKilde dataKilde;
-    private ArrayAdapter<Event_Item> eventItemArrayAdapter;
-    private List<Event_Item> eventItems;
+    private FriendDataKilde dataKilde;
+    private ArrayAdapter <Friend> friendArrayAdapter;
+    List<Friend> friend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +24,22 @@ public class FriendsActivity extends AppCompatActivity {
 
 
         Button btn_newFriend = findViewById(R.id.btn_newFriend);
+        ListView friendListView = findViewById(R.id.listViewFriends);
 
 
-        btn_newFriend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(FriendsActivity.this, NewFriendsActivity.class);
-                startActivity(i);
-            }
+        dataKilde = new FriendDataKilde(this);
+        dataKilde.open();
+        friend = dataKilde.findAllFriends();
+        friendArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, friend);
+        friendListView.setAdapter(friendArrayAdapter);
+
+
+
+
+
+        btn_newFriend.setOnClickListener(view -> {
+            Intent i = new Intent(FriendsActivity.this, NewFriendsActivity.class);
+            startActivity(i);
         });
 
 

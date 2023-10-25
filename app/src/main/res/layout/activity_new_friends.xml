@@ -58,7 +58,7 @@
         />
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/listViewFriends"
         android:layout_width="344dp"
         android:layout_height="288dp"
         android:layout_gravity="center_vertical|center_horizontal"
