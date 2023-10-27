@@ -59,7 +59,8 @@ public class PreferencesActivity extends AppCompatActivity {
                                 //Knappen oppdateres til den valgte tiden
                                 openTimePickerButton.setText(String.format("%02d:%02d", hourOfDay, minute));
                             }
-                        }, currentHour, currentMinute, true);
+                        },
+                        currentHour, currentMinute, true);
                 timePickerDialog.show();
             }
         });

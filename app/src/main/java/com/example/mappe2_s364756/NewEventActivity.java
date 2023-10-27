@@ -1,15 +1,21 @@
 package com.example.mappe2_s364756;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class NewEventActivity extends AppCompatActivity {
@@ -22,6 +28,10 @@ public class NewEventActivity extends AppCompatActivity {
     List<Event_Item> eventItems;
     List<Friend> friends;
     ListView listView;
+    private Calendar calendar;
+    private int currentYear, currentMonth, currentDay;
+    private int currentHour, currentMinute;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +67,43 @@ public class NewEventActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
 
 
+        });
+
+        calendar = Calendar.getInstance();
+        currentYear = calendar.get(Calendar.YEAR);
+        currentMonth = calendar.get(Calendar.MONTH);
+        currentDay = calendar.get(Calendar.DAY_OF_MONTH);
+        currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+        currentMinute = calendar.get(Calendar.MINUTE);
+
+        input_event_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(NewEventActivity.this,new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int day) {
+
+                            input_event_date.setText(String.format(day + "-" + (monthOfYear + 1) + "-" + year));
+                    }
+                }, currentYear, currentMonth, currentDay);
+                datePickerDialog.show();
+            }
+        });
+
+        input_event_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(NewEventActivity.this,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                //Knappen oppdateres til den valgte tiden
+                                input_event_time.setText(String.format("%02d:%02d", hourOfDay, minute));
+                            }
+                        },
+                        currentHour, currentMinute, true);
+                timePickerDialog.show();
+            }
         });
 
         btn_saveNewEvent.setOnClickListener(view -> {
