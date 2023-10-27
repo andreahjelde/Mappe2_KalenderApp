@@ -61,6 +61,7 @@ public class EventDataKilde {
             Event_Item eventItem = cursorToEvent(cursor);
             eventItemList.add(eventItem);
             cursor.moveToNext();
+
         }
         cursor.close();
         return eventItemList;
