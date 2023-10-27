@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/lightBlue"
     android:padding="16dp"
     tools:context=".NewEventActivity">
 
@@ -78,7 +79,7 @@
     <Button
         android:id="@+id/btn_saveNewEvent"
         android:text="@string/btn_saveNewEvent"
-
+        android:backgroundTint="@color/darkBlue"
         android:layout_marginTop="20dp"
         android:layout_width="189dp"
         android:layout_height="wrap_content"

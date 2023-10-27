@@ -50,11 +50,12 @@ public class NewEventActivity extends AppCompatActivity {
         listView.setAdapter(friendArrayAdapter);
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            Friend selectedItem = (Friend) parent.getItemAtPosition(position);
-            Toast.makeText(NewEventActivity.this, "Avtale " + selectedItem.getNameFriend() + " blir slettet fra listen",
+            Friend selectedFriend = (Friend) parent.getItemAtPosition(position);
+
+            Toast.makeText(NewEventActivity.this,  selectedFriend.getNameFriend() + " har blitt valgt, med id " + selectedFriend.getIdFriend()
+                    ,
                     Toast.LENGTH_LONG).show();
-            friendDataKilde.deleteFriend(selectedItem.getId());
-            friendArrayAdapter.notifyDataSetChanged();
+
 
         });
 

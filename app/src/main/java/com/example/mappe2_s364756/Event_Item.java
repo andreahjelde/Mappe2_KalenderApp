@@ -7,7 +7,8 @@ public class Event_Item {
     private String dateEvent;
     private String timeEvent;
     private String placeEvent;
-    private long id;
+    private long idEvent;
+
 
     @NonNull
     @Override
@@ -34,9 +35,10 @@ public class Event_Item {
         return placeEvent;
     }
 
-    public long getId() {
-        return id;
+    public long getIdEvent() {
+        return idEvent;
     }
+
 
     public void setNameEvent(String nameEvent) {
         this.nameEvent = nameEvent;
@@ -54,7 +56,8 @@ public class Event_Item {
         this.placeEvent = placeEvent;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdEvent(long idEvent) {
+        this.idEvent = idEvent;
     }
+
 }

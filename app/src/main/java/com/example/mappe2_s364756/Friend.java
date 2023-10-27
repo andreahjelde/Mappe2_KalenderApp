@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 public class Friend {
     private String nameFriend;
     private String phoneFriend;
-    private long id;
+    private long idFriend;
 
     @NonNull
     @Override
@@ -23,8 +23,8 @@ public class Friend {
         return phoneFriend;
     }
 
-    public long getId() {
-        return id;
+    public long getIdFriend() {
+        return idFriend;
     }
 
     public void setNameFriend(String nameFriend) {
@@ -35,7 +35,7 @@ public class Friend {
         this.phoneFriend = phoneFriend;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdFriend(long idFriend) {
+        this.idFriend = idFriend;
     }
 }

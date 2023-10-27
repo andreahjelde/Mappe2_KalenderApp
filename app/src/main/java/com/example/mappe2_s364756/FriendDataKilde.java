@@ -40,7 +40,7 @@ public class FriendDataKilde {
 
     private Friend cursorToFriend(Cursor cursor){
         Friend friend = new Friend();
-        friend.setId(cursor.getLong(cursor.getColumnIndexOrThrow(DatabaseHjelper.KOLONNE_FRIEND_ID)));
+        friend.setIdFriend(cursor.getLong(cursor.getColumnIndexOrThrow(DatabaseHjelper.KOLONNE_FRIEND_ID)));
         friend.setNameFriend(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHjelper.KOLONNE_FRIEND_NAME)));
         friend.setPhoneFriend(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHjelper.KOLONNE_FRIEND_PHONE)));
         return friend;

@@ -35,7 +35,7 @@ public class EventDataKilde {
         long insertId = database.insert(DatabaseHjelper.TABELL_EVENTS, null,
                 values);
         Cursor cursor = database.query(DatabaseHjelper.TABELL_EVENTS, null,
-                DatabaseHjelper.KOLONNE_ID + " = " + insertId, null, null, null, null);
+                DatabaseHjelper.KOLONNE_EVENT_ID + " = " + insertId, null, null, null, null);
         cursor.moveToFirst();
         Event_Item newEvent = cursorToEvent(cursor);
         cursor.close();
@@ -44,8 +44,7 @@ public class EventDataKilde {
 
     private Event_Item cursorToEvent(Cursor cursor) {
         Event_Item eventItem = new Event_Item();
-
-        eventItem.setId(cursor.getLong(cursor.getColumnIndexOrThrow(DatabaseHjelper.KOLONNE_ID)));
+        eventItem.setIdEvent(cursor.getLong(cursor.getColumnIndexOrThrow(DatabaseHjelper.KOLONNE_EVENT_ID)));
         eventItem.setNameEvent(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHjelper.KOLONNE_EVENT_NAME)));
         eventItem.setDateEvent(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHjelper.KOLONNE_EVENT_DATE)));
         eventItem.setTimeEvent(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHjelper.KOLONNE_EVENT_TIME)));
@@ -69,12 +68,9 @@ public class EventDataKilde {
 
     public void deleteEventItem(long eventId) {
         database.delete(DatabaseHjelper.TABELL_EVENTS,
-                DatabaseHjelper.KOLONNE_ID + " =? ",
+                DatabaseHjelper.KOLONNE_EVENT_ID + " =? ",
                 new String[]{Long.toString(eventId)});
     }
-
-
-
 }
 
 
