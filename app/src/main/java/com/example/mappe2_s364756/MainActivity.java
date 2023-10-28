@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
             Event_Item selectedItem = (Event_Item) parent.getItemAtPosition(position);
             Toast.makeText(MainActivity.this, "Avtale " + selectedItem.getNameEvent() + " blir slettet fra listen",
                     Toast.LENGTH_LONG).show();
-            dataKilde.deleteEventItem(selectedItem.getIdEvent());
-           eventItemArrayAdapter.notifyDataSetChanged();
+            //dataKilde.deleteEventItem(selectedItem.getIdEvent());
+            eventItemArrayAdapter.notifyDataSetChanged();
 
         });
                 //_______________________________________________________________________________________

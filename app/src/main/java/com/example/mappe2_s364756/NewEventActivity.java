@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -31,6 +32,7 @@ public class NewEventActivity extends AppCompatActivity {
     private Calendar calendar;
     private int currentYear, currentMonth, currentDay;
     private int currentHour, currentMinute;
+    private long selectedFriendId;
 
 
     @Override
@@ -59,6 +61,7 @@ public class NewEventActivity extends AppCompatActivity {
 
         listView.setAdapter(friendArrayAdapter);
 
+
         listView.setOnItemClickListener((parent, view, position, id) -> {
             Friend selectedFriend = (Friend) parent.getItemAtPosition(position);
 
@@ -68,6 +71,8 @@ public class NewEventActivity extends AppCompatActivity {
 
 
         });
+
+        selectedFriendId = -1;
 
         calendar = Calendar.getInstance();
         currentYear = calendar.get(Calendar.YEAR);
@@ -106,6 +111,13 @@ public class NewEventActivity extends AppCompatActivity {
             }
         });
 
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Friend selectedFriend = (Friend) parent.getItemAtPosition(position);
+            selectedFriendId = selectedFriend.getIdFriend(); // Oppdater valgt venns ID
+            Toast.makeText(NewEventActivity.this, selectedFriend.getNameFriend() + " har blitt valgt, med id " + selectedFriend.getIdFriend(),
+                    Toast.LENGTH_LONG).show();
+        });
+
         btn_saveNewEvent.setOnClickListener(view -> {
             String eventName = input_event_name.getText().toString();
             String eventDate = input_event_date.getText().toString();
@@ -113,11 +125,12 @@ public class NewEventActivity extends AppCompatActivity {
             String eventPlace = input_event_place.getText().toString();
 
 
-
-            if(!eventName.isEmpty()  ){
-                Event_Item eventItem = dataKilde.addNewEvent(eventName, eventDate, eventTime, eventPlace);
+            if (!eventName.isEmpty() && selectedFriendId != -1) {
+                Event_Item eventItem = dataKilde.addNewEvent(eventName, eventDate, eventTime, eventPlace, selectedFriendId);
                 eventItemArrayAdapter.add(eventItem);
-
+            } else {
+                // Håndter feil, for eksempel når ingen venn er valgt
+                Toast.makeText(NewEventActivity.this, "Velg en venn før du lagrer avtalen", Toast.LENGTH_LONG).show();
             }
 
             Intent i= new Intent(NewEventActivity.this, MainActivity.class);
@@ -125,6 +138,9 @@ public class NewEventActivity extends AppCompatActivity {
             startActivity(i);
         });
     }
+
+
+
     @Override
     protected void onResume() {
         dataKilde.open();

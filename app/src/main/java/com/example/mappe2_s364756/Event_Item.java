@@ -8,12 +8,13 @@ public class Event_Item {
     private String timeEvent;
     private String placeEvent;
     private long idEvent;
+    private long idEventFriend;
 
 
     @NonNull
     @Override
     public String toString() {
-        return nameEvent + "    " + dateEvent + " kl." + timeEvent + "     "+     placeEvent;
+        return  dateEvent + " kl." + timeEvent + ",     "+ nameEvent + "    " +     placeEvent;
     }
 
     public Event_Item(){
@@ -39,6 +40,9 @@ public class Event_Item {
         return idEvent;
     }
 
+    public long getIdEventFriend() {
+        return idEventFriend;
+    }
 
     public void setNameEvent(String nameEvent) {
         this.nameEvent = nameEvent;
@@ -60,4 +64,7 @@ public class Event_Item {
         this.idEvent = idEvent;
     }
 
+    public void setIdEventFriend(long idEventFriend) {
+        this.idEventFriend = idEventFriend;
+    }
 }
