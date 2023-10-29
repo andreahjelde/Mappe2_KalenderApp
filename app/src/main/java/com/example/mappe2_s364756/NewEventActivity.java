@@ -129,8 +129,8 @@ public class NewEventActivity extends AppCompatActivity {
                 Event_Item eventItem = dataKilde.addNewEvent(eventName, eventDate, eventTime, eventPlace, selectedFriendId);
                 eventItemArrayAdapter.add(eventItem);
             } else {
-                // Håndter feil, for eksempel når ingen venn er valgt
-                Toast.makeText(NewEventActivity.this, "Velg en venn før du lagrer avtalen", Toast.LENGTH_LONG).show();
+                Event_Item eventItem = dataKilde.addNewEvent(eventName, eventDate, eventTime, eventPlace, selectedFriendId);
+                eventItemArrayAdapter.add(eventItem);
             }
 
             Intent i= new Intent(NewEventActivity.this, MainActivity.class);

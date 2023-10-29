@@ -44,60 +44,53 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="36dp"
         android:text="@string/placeholder_decideTimeOfSms"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
-    <Button
+    <GridLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/chooseTimeButton"
-        android:backgroundTint="@color/darkBlue"
-        android:text="@string/chooseTimeButton"/>
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chooseTimeButton"
+            android:backgroundTint="@color/darkBlue"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:text="@string/chooseTimeButton"/>
+
+        <TextView
+            android:id="@+id/setTimeMessageTxt"
+            android:layout_width="98dp"
+            android:layout_height="30dp"
+            android:textSize="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:text="" />
+    </GridLayout>
 
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="31dp"
         android:layout_marginTop="20dp"
         android:text="@string/placeholder_setTextOfSms"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/defaultMessage"
-        android:text="@string/defaultMessage"/>
-
+        android:layout_width="wrap_content"
+        android:textSize="18dp"
+        android:layout_height="38dp"
+        android:text="@string/defaultMessage" />
 
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/setMessageBtn"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/darkBlue"
-        android:text="@string/setMessageBtn"/>
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/placeholder_settingsEvents"
-        android:textStyle="bold"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="@string/placeholder_settingsFriends"
-        android:textStyle="bold"
-        />
-
+        android:text="@string/setMessageBtn" />
 
 
 </LinearLayout>

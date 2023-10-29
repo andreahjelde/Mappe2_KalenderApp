@@ -10,20 +10,21 @@
     <TextView
         android:id="@+id/placeholder_nameOfEvent"
         android:layout_width="match_parent"
-        android:layout_height="53dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:text="@string/placeholder_setText" />
 
     <EditText
         android:id="@+id/dialogInput"
         android:layout_width="match_parent"
-        android:layout_height="70dp"></EditText>
+        android:layout_height="wrap_content"></EditText>
 
 
     <Button
         android:id="@+id/dialogButtonAddEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Opprett avtale" />
+        android:text="Lagre melding" />
 
         <Button
             android:id="@+id/dialogButtonExit"

@@ -24,6 +24,7 @@
     <string name="title_newFriends">Legg til ny venn</string>
     <string name="placeholder_friendName">Navn:</string>
     <string name="placeholder_friendPhone">Tlf-nummer:</string>
+    <string name="btn_saveNewFriend">Lagre ny venn</string>
 
     <!-- ____________Preferences_________________ -->
     <string name="titlePreferences">Instillinger</string>
@@ -34,7 +35,7 @@
     <string name="placeholder_settingsFriends">Gjør endringer på venner: </string>
 
     <string name="btnOn">PÅ</string>
-    <string name="btnOf">AV</string>
+    <string name="btnOf">PÅ</string>
     <string name="chooseTimeButton">bestem tidspunkt</string>
     <string name="defaultMessage">Husk avtalen din!</string>
     <string name="setMessageBtn">sett tekst</string>

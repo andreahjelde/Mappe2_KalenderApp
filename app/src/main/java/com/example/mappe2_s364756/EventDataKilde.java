@@ -64,17 +64,11 @@ public class EventDataKilde {
                 null, null, null, null, null, null);
         cursor.moveToFirst();
 
-
-
-        // Bruk Comparator til å sortere listen
-
-
         while (!cursor.isAfterLast()) {
             Event_Item eventItem = cursorToEvent(cursor);
             eventItemList.add(eventItem);
             cursor.moveToNext();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
 
             Comparator<Event_Item> eventComparator = new Comparator<Event_Item>() {
                 @Override
@@ -88,13 +82,10 @@ public class EventDataKilde {
 
             Collections.sort(eventItemList, eventComparator);
 
-
-
         }
         cursor.close();
         return eventItemList;
     }
-
 
 
     public void deleteEventItem(long eventId) {
@@ -102,6 +93,7 @@ public class EventDataKilde {
                 DatabaseHjelper.KOLONNE_EVENT_ID + " =? ",
                 new String[]{Long.toString(eventId)});
     }
+
 }
 
 

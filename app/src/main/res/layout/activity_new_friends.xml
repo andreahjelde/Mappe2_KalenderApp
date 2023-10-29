@@ -50,7 +50,7 @@
 
     <Button
         android:id="@+id/btn_saveNewFriend"
-        android:text="@string/btn_saveNewEvent"
+        android:text="@string/btn_saveNewFriend"
         android:backgroundTint="@color/darkBlue"
         android:layout_marginTop="20dp"
         android:layout_width="189dp"

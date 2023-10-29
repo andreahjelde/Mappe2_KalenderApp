@@ -3,7 +3,9 @@ package com.example.mappe2_s364756;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -32,6 +34,7 @@ public class PreferencesActivity extends AppCompatActivity {
     private Calendar calendar;
     private int currentHour, currentMinute;
     TextView defaultMessage;
+    TextView setTimeMessageTxt;
 
 
     @Override
@@ -43,11 +46,25 @@ public class PreferencesActivity extends AppCompatActivity {
         btnOf = findViewById(R.id.btnOf);
         Button openTimePickerButton = findViewById(R.id.chooseTimeButton);
         defaultMessage = findViewById(R.id.defaultMessage);
+        setTimeMessageTxt = findViewById(R.id.setTimeMessageTxt);
 
 
         calendar = Calendar.getInstance();
         currentHour = calendar.get(Calendar.HOUR_OF_DAY);
         currentMinute = calendar.get(Calendar.MINUTE);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        String savedMessage = sharedPreferences.getString("customMessage", "");
+        String savedTime = sharedPreferences.getString("setTime", "");
+
+        if (!savedMessage.isEmpty()  ) {
+            defaultMessage.setText(savedMessage);
+
+        }
+        if(!savedTime.isEmpty()){
+            setTimeMessageTxt.setText(savedTime);
+        }
+
 
         openTimePickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +74,14 @@ public class PreferencesActivity extends AppCompatActivity {
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                                 //Knappen oppdateres til den valgte tiden
-                                openTimePickerButton.setText(String.format("%02d:%02d", hourOfDay, minute));
+                                setTimeMessageTxt.setText(String.format("%02d:%02d", hourOfDay, minute));
+
+                                SharedPreferences sharedPreferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                                // Lagre tiden
+                                editor.putString("setTime", String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute));
+                                editor.apply();
                             }
                         },
                         currentHour, currentMinute, true);
@@ -88,6 +112,12 @@ public class PreferencesActivity extends AppCompatActivity {
             dialogButtonAdd.setOnClickListener((view -> {
                 String nyMelding = dialogInput.getText().toString();
                 defaultMessage.setText(nyMelding);
+
+                SharedPreferences sharedPreferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                editor.putString("customMessage", nyMelding);
+                editor.apply();
 
 
                 dialog.dismiss();
