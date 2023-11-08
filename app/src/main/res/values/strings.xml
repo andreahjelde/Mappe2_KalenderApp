@@ -34,11 +34,11 @@
     <string name="placeholder_settingsEvents">Gjør endringer på avtaler: </string>
     <string name="placeholder_settingsFriends">Gjør endringer på venner: </string>
 
-    <string name="btnOn">PÅ</string>
-    <string name="btnOf">PÅ</string>
-    <string name="chooseTimeButton">bestem tidspunkt</string>
+    <string name="btnSmsOn">PÅ</string>
+    <string name="btnSmsOf">AV</string>
+    <string name="chooseTimeButton">endre tidspunkt</string>
     <string name="defaultMessage">Husk avtalen din!</string>
-    <string name="setMessageBtn">sett tekst</string>
+    <string name="setMessageBtn">endre tekst</string>
 
 
     <string name="placeholder_setText">Skriv inn en ny melding</string>

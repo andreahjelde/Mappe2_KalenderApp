@@ -61,7 +61,8 @@ public class EventDataKilde {
     public List<Event_Item> findAllEvents() {
         List<Event_Item> eventItemList = new ArrayList<>();
         Cursor cursor = database.query(DatabaseHjelper.TABELL_EVENTS,
-                null, null, null, null, null, null);
+                null,
+                null, null, null, null, null);
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {
