@@ -37,7 +37,6 @@ import java.util.Calendar;
 public class  SettingsFragment extends PreferenceFragmentCompat {
     private static final int SEND_SMS_PERMISSION_REQUEST_CODE = 1;
 
-
     private EditTextPreference timePreference; // Deklarer timePreference som en klassevariabel
     private EditTextPreference messagePreference; // Deklarer messagePreference som en klassevariabel
 
@@ -50,9 +49,11 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
         filter.addAction("com.example.service.MITTSIGNAL");
         requireActivity().registerReceiver(myBroadcastReceiver, filter);
 
-        Preference telefonPreference = findPreference("telefon");
-
         Preference notificationsPreference = findPreference("notifications");
+        messagePreference = findPreference("message");
+        timePreference = findPreference("time");
+
+        // Få tilgang til "notification" (checkbox) preference
         if (notificationsPreference != null) {
             // Legg til en lytter for endringer i "notifications" preference
             notificationsPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
@@ -66,7 +67,6 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
         }
 
         // Få tilgang til "message" preference
-        messagePreference = findPreference("message");
         if (messagePreference != null) {
             // Legg til en lytter for klikk på "message" preference
             messagePreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -78,22 +78,23 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
         }
 
         // Få tilgang til "time" preference
-        Preference timePreference = findPreference("time");
         if (timePreference != null) {
             // Legg til en lytter for klikk på "time" preference
             timePreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    showTimePickerDialog();
-                    return true;
+                    // Check if the clicked preference is the "time" preference
+                    if (preference.getKey().equals("time")) {
+                        showTimePickerDialog();
+                        return true; // Consume the click event
+                    }
+                    return false;
                 }
             });
         }
 }
 
-
-
-    ///________________________________________________________________________
+    ///_________________________Dialogboks for å velge klokkeslett_________________________________
 
     private void showTimePickerDialog() {
         // Hent nåværende tid fra preferansene eller bruk standard tid
@@ -139,28 +140,55 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
     }
 
 
-
-
-    //______________________________________________________________________________________________
-    // Metode for å håndtere endringer i "notifications" preference
+    //__________________________Håndterer checkbox__________________________________________________
+    // Metode for å håndtere endringer i "notifications" preference --> bruker får opp dialogboks første gang man huker av
     private void handleNotificationsChange(boolean notificationsEnabled) {
         if (notificationsEnabled) {
-
-                // Tillatelse allerede gitt, send SMS og start tjenester
+            // Sjekk om SMS-tillatelsen er gitt
+            if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+                // Hvis ikke gitt, be om tillatelse
+                ActivityCompat.requestPermissions(requireActivity(), new String[]{android.Manifest.permission.SEND_SMS}, SEND_SMS_PERMISSION_REQUEST_CODE);
+            } else {
+                // Hvis tillatelse er gitt, utfør handlingene
                 Log.d("CHECKBOXES", "huket på");
                 startService();
                 sendBroadcast();
                 setPeriodisk();
-
-                // Sjekk om knappen er huket av (her antar jeg at 'send' er en knapp)
-
+            }
         } else {
+            // Hvis "notificationsEnabled" er falsk, stopp tjeneste og periodisk
             Log.d("CHECKBOXES", "huket av");
             stoppService();
             stoppPeriodisk();
         }
     }
 
+
+
+    //__________________________________________________________________________
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == SEND_SMS_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, you can now send SMS
+            } else {
+                Toast.makeText(
+                        requireContext(),
+                        "SMS tillatelse ikke gitt. Du kan ikke sende SMS.",
+                        Toast.LENGTH_SHORT
+                ).show();
+                // Assuming send is a button, you should disable it using the following code:
+                //send.setEnabled(false);
+            }
+        }
+    }
+
+
+
+    //-------------------------Metoder for broadcast-----------------------------------------------
 
     public void startService() {
         Intent intent = new Intent(requireContext(), MinService.class);

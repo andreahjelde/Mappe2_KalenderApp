@@ -5,9 +5,12 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 
 import java.util.Calendar;
 
@@ -20,24 +23,44 @@ public class SettPeriodiskService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        // Hent klokkeslett fra SharedPreferences
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String time = preferences.getString("time", "");
+
+        // Hvis klokkeslett ikke er angitt, avslutt tjenesten
+        if (time.isEmpty()) {
+            stopSelf();
+            return START_NOT_STICKY;
+        }
+
+        // Analyser klokkeslett fra preferansene
+        String[] timeParts = time.split(":");
+        if (timeParts.length != 2) {
+            // Ugyldig format, avslutt tjenesten
+            stopSelf();
+            return START_NOT_STICKY;
+        }
+
+        // Hent time og minutt
+        int hourOfDay = Integer.parseInt(timeParts[0]);
+        int minute = Integer.parseInt(timeParts[1]);
+
+        // Opprett kalender for dagens dato
         java.util.Calendar cal = Calendar.getInstance();
+
+        // Sett klokkeslett for alarmen
+        cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        cal.set(Calendar.MINUTE, minute);
+        cal.set(Calendar.SECOND, 0);
+
+        // Opprett Intent for MinService
         Intent i = new Intent(this, MinService.class);
         PendingIntent pintent = PendingIntent.getService(this, 0, i, PendingIntent.FLAG_IMMUTABLE);
         AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
-        // Hent dagens kalender
-        cal = Calendar.getInstance();
-
-        // Legg til en dag til dagens dato for å sette første utløpstidspunkt til samme tidspunkt i morgen
-        cal.add(Calendar.DAY_OF_MONTH, 1);
-
-        // Sett tiden for første utløp til ønsket tidspunkt (for eksempel kl. 06:00 om morgenen)
-        cal.set(Calendar.HOUR_OF_DAY, 6);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-
-        // Sett tjenesten til å kjøre en gang i døgnet
+        // Sett tjenesten til å kjøre en gang på det angitte klokkeslettet
         alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pintent);
+        Log.d("alarm","alarm");
 
         return super.onStartCommand(intent, flags, startId);
     }

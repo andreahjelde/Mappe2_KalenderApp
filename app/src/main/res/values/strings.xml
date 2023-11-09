@@ -26,20 +26,5 @@
     <string name="placeholder_friendPhone">Tlf-nummer:</string>
     <string name="btn_saveNewFriend">Lagre ny venn</string>
 
-    <!-- ____________Preferences_________________ -->
-    <string name="titlePreferences">Instillinger</string>
-    <string name="placeholder_onOfSms">slå sms-tjenesten av eller på: (default: av)</string>
-    <string name="placeholder_decideTimeOfSms">Velg når SMSen skal sendes: (default: kl.06:00)</string>
-    <string name="placeholder_setTextOfSms">sette en default melding som skal sendes i SMSen: </string>
-    <string name="placeholder_settingsEvents">Gjør endringer på avtaler: </string>
-    <string name="placeholder_settingsFriends">Gjør endringer på venner: </string>
 
-    <string name="btnSmsOn">PÅ</string>
-    <string name="btnSmsOf">AV</string>
-    <string name="chooseTimeButton">endre tidspunkt</string>
-    <string name="defaultMessage">Husk avtalen din!</string>
-    <string name="setMessageBtn">endre tekst</string>
-
-
-    <string name="placeholder_setText">Skriv inn en ny melding</string>
 </resources>
