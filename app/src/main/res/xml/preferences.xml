@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Instillinger">
+
+        <CheckBoxPreference
+            android:key="notifications"
+            android:title="Skru på sms-varsel"
+            android:summary="Vil du sende ut en påminnelse om avtaler?"
+            android:defaultValue="false" />
+
+        <EditTextPreference
+            android:key="time"
+            android:title="Endre klokkeslett"
+            android:summary="Vil du endre klokkeslett på når meldingen skal bli sendt?"
+            android:defaultValue="06:00"
+            android:inputType="text" />
+
+        <EditTextPreference
+            android:key="message"
+            android:title="Endreinnhold i melding"
+            android:summary="Vil du endre innholdet i meldingen som skal bli sendt?"
+            android:defaultValue="Husk avtalen din i dag"
+            android:inputType="text" />
+
+
+    </PreferenceCategory>
+</PreferenceScreen>

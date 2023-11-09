@@ -1,12 +1,16 @@
 package com.example.mappe2_s364756;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
@@ -34,14 +38,39 @@ public class FriendsActivity extends AppCompatActivity {
         friendListView.setAdapter(friendArrayAdapter);
 
 
-
-
-
         btn_newFriend.setOnClickListener(view -> {
             Intent i = new Intent(FriendsActivity.this, NewFriendsActivity.class);
             startActivity(i);
         });
 
+
+        //------------------Dialogboks for å slette venn når man trykker på et element fra listen
+        friendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Friend selectedItem = (Friend) parent.getItemAtPosition(position);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(FriendsActivity.this);
+                builder.setTitle("Bekreft sletting");
+                builder.setMessage("Er du sikker på at du vil slette denne vennen " + selectedItem.getNameFriend() + "?");
+                builder.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dataKilde.deleteFriend(selectedItem.getIdFriend());
+                        friendArrayAdapter.remove(selectedItem); // Fjern elementet fra adapteren
+                        friendArrayAdapter.notifyDataSetChanged();
+                    }
+                });
+                builder.setNegativeButton("Avbryt", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.show();
+            }
+        });
 
 
     }

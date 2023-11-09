@@ -75,42 +75,39 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btn_preferences.setOnClickListener(view -> {
-            Intent i = new Intent(MainActivity.this, PreferencesActivity.class);
+            Intent i = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(i);
         });
 
 
+        //------------------Dialogboks for å slette avtale når man trykker på et element fra listen
         eventItemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                eventItemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                Event_Item selectedItem = (Event_Item) parent.getItemAtPosition(position);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Bekreft sletting");
+                builder.setMessage("Er du sikker på at du vil slette avtalen " + selectedItem.getNameEvent() + "?");
+                builder.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Event_Item selectedItem = (Event_Item) parent.getItemAtPosition(position);
-
-                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                        builder.setTitle("Bekreft sletting");
-                        builder.setMessage("Er du sikker på at du vil slette avtalen " + selectedItem.getNameEvent() + "?");
-                        builder.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dataKilde.deleteEventItem(selectedItem.getIdEvent());
-                                eventItemArrayAdapter.remove(selectedItem); // Fjern elementet fra adapteren
-                                eventItemArrayAdapter.notifyDataSetChanged();
-                            }
-                        });
-                        builder.setNegativeButton("Avbryt", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-
-                        builder.show();
+                    public void onClick(DialogInterface dialog, int which) {
+                        dataKilde.deleteEventItem(selectedItem.getIdEvent());
+                        eventItemArrayAdapter.remove(selectedItem); // Fjern elementet fra adapteren
+                        eventItemArrayAdapter.notifyDataSetChanged();
+                    }
+                });
+                builder.setNegativeButton("Avbryt", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
                     }
                 });
 
+                builder.show();
             }
         });
+
+
     }
 }
