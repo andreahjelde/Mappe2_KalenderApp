@@ -35,19 +35,13 @@ import java.util.Calendar;
 
 
 public class  SettingsFragment extends PreferenceFragmentCompat {
-    private static final int SEND_SMS_PERMISSION_REQUEST_CODE = 1;
-
     private EditTextPreference timePreference; // Deklarer timePreference som en klassevariabel
     private EditTextPreference messagePreference; // Deklarer messagePreference som en klassevariabel
-
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preferences, rootKey);
-        BroadcastReceiver myBroadcastReceiver = new MinBroadcastReceiver();
-        IntentFilter filter = new IntentFilter("com.example.service.MITTSIGNAL");
-        filter.addAction("com.example.service.MITTSIGNAL");
-        requireActivity().registerReceiver(myBroadcastReceiver, filter);
+
 
         Preference notificationsPreference = findPreference("notifications");
         messagePreference = findPreference("message");
@@ -97,64 +91,52 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
     ///_________________________Dialogboks for å velge klokkeslett_________________________________
 
     private void showTimePickerDialog() {
-        // Hent nåværende tid fra preferansene eller bruk standard tid
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        String time = preferences.getString("time", "");
+        // Get the time from the EditTextPreference
+        String time = timePreference.getText();
 
-        Calendar calendar = Calendar.getInstance();
-        int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
-        int currentMinute = calendar.get(Calendar.MINUTE);
+        // If EditTextPreference value is empty, use the current time
+        if (time.isEmpty()) {
+            Calendar calendar = Calendar.getInstance();
+            int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+            int currentMinute = calendar.get(Calendar.MINUTE);
 
-        // Analyser tiden fra preferansene hvis den er tilgjengelig
-        if (!time.isEmpty()) {
+            // Analyze the time from preferences if available
             String[] timeParts = time.split(":");
             if (timeParts.length == 2) {
                 currentHour = Integer.parseInt(timeParts[0]);
                 currentMinute = Integer.parseInt(timeParts[1]);
             }
-        }
 
-        // Opprett og vis TimePickerDialog
-        TimePickerDialog timePickerDialog = new TimePickerDialog(
-                getContext(),
-                new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        // Oppdater tiden i preferansene
-                        String formattedTime = String.format("%02d:%02d", hourOfDay, minute);
-                        SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("time", formattedTime);
-                        editor.apply();
-
-                        // Oppdater preference summary
-                        if (timePreference != null) {
+            // Create and show TimePickerDialog
+            TimePickerDialog timePickerDialog = new TimePickerDialog(
+                    getContext(),
+                    new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                            // Update the time in preferences
+                            String formattedTime = String.format("%02d:%02d", hourOfDay, minute);
                             timePreference.setText(formattedTime);
                         }
-                    }
-                },
-                currentHour,
-                currentMinute,
-                DateFormat.is24HourFormat(getContext())
-        );
-        timePickerDialog.show();
+                    },
+                    currentHour,
+                    currentMinute,
+                    DateFormat.is24HourFormat(getContext())
+            );
+            timePickerDialog.show();
+        }
     }
 
 
     //__________________________Håndterer checkbox__________________________________________________
-    // Metode for å håndtere endringer i "notifications" preference --> bruker får opp dialogboks første gang man huker av
     private void handleNotificationsChange(boolean notificationsEnabled) {
         if (notificationsEnabled) {
             // Sjekk om SMS-tillatelsen er gitt
-            if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-                // Hvis ikke gitt, be om tillatelse
-                ActivityCompat.requestPermissions(requireActivity(), new String[]{android.Manifest.permission.SEND_SMS}, SEND_SMS_PERMISSION_REQUEST_CODE);
-            } else {
                 // Hvis tillatelse er gitt, utfør handlingene
                 Log.d("CHECKBOXES", "huket på");
                 startService();
                 sendBroadcast();
                 setPeriodisk();
-            }
+
         } else {
             // Hvis "notificationsEnabled" er falsk, stopp tjeneste og periodisk
             Log.d("CHECKBOXES", "huket av");
@@ -162,30 +144,6 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
             stoppPeriodisk();
         }
     }
-
-
-
-    //__________________________________________________________________________
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == SEND_SMS_PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, you can now send SMS
-            } else {
-                Toast.makeText(
-                        requireContext(),
-                        "SMS tillatelse ikke gitt. Du kan ikke sende SMS.",
-                        Toast.LENGTH_SHORT
-                ).show();
-                // Assuming send is a button, you should disable it using the following code:
-                //send.setEnabled(false);
-            }
-        }
-    }
-
 
 
     //-------------------------Metoder for broadcast-----------------------------------------------

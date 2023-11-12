@@ -14,6 +14,7 @@ public class MinService extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -31,5 +32,8 @@ public class MinService extends Service {
         super.onDestroy();
         Log.d("Minservice", "Service fjernet");
     }
+
+
+
 }
 

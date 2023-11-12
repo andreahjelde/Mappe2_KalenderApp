@@ -1,10 +1,15 @@
 package com.example.mappe2_s364756;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.BroadcastReceiver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -17,8 +22,11 @@ import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.util.Calendar;
 import java.util.List;
@@ -33,13 +41,27 @@ public class MainActivity extends AppCompatActivity {
     private EventDataKilde dataKilde;
     private ArrayAdapter<Event_Item> eventItemArrayAdapter;
     List<Event_Item> eventItems;
-
+    private static final int SEND_SMS_PERMISSION_REQUEST_CODE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        BroadcastReceiver myBroadcastReceiver = new MinBroadcastReceiver();
+        IntentFilter filter = new IntentFilter("com.example.service.MITTSIGNAL");
+        filter.addAction("com.example.service.MITTSIGNAL");
+        this.registerReceiver(myBroadcastReceiver, filter);
 
-        Button btn_friends = findViewById(R.id.btn_friends);
+        //--------Dialogboks for å tillate sms-tjeneste
+        if (ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.SEND_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new
+                            String[]{android.Manifest.permission.SEND_SMS},
+                    SEND_SMS_PERMISSION_REQUEST_CODE);
+        }
+
+
+    Button btn_friends = findViewById(R.id.btn_friends);
         Button btn_preferences = findViewById(R.id.btn_preferences);
         Button btn_newEvent = findViewById(R.id.btn_newEvent);
 
@@ -107,7 +129,25 @@ public class MainActivity extends AppCompatActivity {
                 builder.show();
             }
         });
+    }
 
-
+    //__________________________________________________________________________
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == SEND_SMS_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, you can now send SMS
+            } else {
+                Toast.makeText(
+                        this,
+                        "SMS tillatelse ikke gitt. Du kan ikke sende SMS.",
+                        Toast.LENGTH_SHORT
+                ).show();
+                // Assuming send is a button, you should disable it using the following code:
+                //send.setEnabled(false);
+            }
+        }
     }
 }
