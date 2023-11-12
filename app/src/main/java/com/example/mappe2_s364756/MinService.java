@@ -24,6 +24,7 @@ public class MinService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Toast.makeText(getApplicationContext(), "I MinService",
                 Toast.LENGTH_SHORT).show();
+
         Log.d("Minservice","I min service");
         return super.onStartCommand(intent, flags, startId);
     }

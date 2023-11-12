@@ -14,7 +14,8 @@
             android:title="Endre klokkeslett"
             android:summary="Vil du endre klokkeslett på når meldingen skal bli sendt?"
             android:defaultValue="06:00"
-            android:inputType="text" />
+            android:inputType="time"
+            />
 
         <EditTextPreference
             android:key="message"

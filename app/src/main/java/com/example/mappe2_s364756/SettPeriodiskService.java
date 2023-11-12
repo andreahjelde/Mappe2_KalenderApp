@@ -10,6 +10,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.preference.EditTextPreference;
 import androidx.preference.PreferenceManager;
 
 import java.util.Calendar;
@@ -23,17 +24,20 @@ public class SettPeriodiskService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        // Hent klokkeslett fra SharedPreferences
+        Log.d("SettPeriodiskService", "onStartCommand started");
+
+        // Hent tid fra SharedPreferences
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String time = preferences.getString("time", "");
 
-        // Hvis klokkeslett ikke er angitt, avslutt tjenesten
+        // Hvis tid ikke er angitt, avslutt tjenesten
         if (time.isEmpty()) {
             stopSelf();
             return START_NOT_STICKY;
         }
 
-        // Analyser klokkeslett fra preferansene
+        Log.d("SettPeriodiskService", "Time from preferences: " + time);
+        // Analyser tid fra preferansene
         String[] timeParts = time.split(":");
         if (timeParts.length != 2) {
             // Ugyldig format, avslutt tjenesten
@@ -60,7 +64,6 @@ public class SettPeriodiskService extends Service {
 
         // Sett tjenesten til å kjøre en gang på det angitte klokkeslettet
         alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pintent);
-        Log.d("alarm","alarm");
 
         return super.onStartCommand(intent, flags, startId);
     }
