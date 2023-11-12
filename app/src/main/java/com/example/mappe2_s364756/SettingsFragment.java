@@ -2,22 +2,15 @@ package com.example.mappe2_s364756;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.util.Log;
-import android.widget.TimePicker;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-
-import java.util.Calendar;
-
 
 public class  SettingsFragment extends PreferenceFragmentCompat {
     private EditTextPreference timePreference; // Deklarer timePreference som en klassevariabel
@@ -61,22 +54,15 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
             if (preference.getKey().equals("time")) {
                 Log.d("timePreference", "time: " );
                 return true; // Consume the click event
-
             }
             return false;
 
         });
+
         timePreference.setOnPreferenceChangeListener((a,b)->{
-            if(notificationsPreference.isChecked())
-            {
-                Log.d("71", "71 ");
-                Log.d("71", "72 " +b);
+            if(notificationsPreference.isChecked()) {
                 setPeriodisk();
             }
-
-
-
-
             return  true;
         });
 }
@@ -84,18 +70,12 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
     //__________________________Håndterer checkbox__________________________________________________
     private void handleNotificationsChange(boolean notificationsEnabled) {
         if (notificationsEnabled) {
-            // Sjekk om SMS-tillatelsen er gitt
-                // Hvis tillatelse er gitt, utfør handlingene
                 Log.d("CHECKBOXES", "huket på");
                 startService();
                 sendBroadcast();
-
-                //Den nye verdien til timePreference vil bare oppdateres hver gang setPeriodisk() kjøres på nytt.
-            // Så får å oppdatere tiden må man huke av og på checkboxen
                 setPeriodisk();
 
         } else {
-            // Hvis "notificationsEnabled" er falsk, stopp tjeneste og periodisk
             Log.d("CHECKBOXES", "huket av");
             stoppService();
             stoppPeriodisk();
@@ -103,8 +83,7 @@ public class  SettingsFragment extends PreferenceFragmentCompat {
     }
 
 
-    //-------------------------Metoder for broadcast-----------------------------------------------
-
+    //-------------------------Metoder for Service og broadcast-------------------------------------
     public void startService() {
         Intent intent = new Intent(requireContext(), MinService.class);
         requireContext().startService(intent);
